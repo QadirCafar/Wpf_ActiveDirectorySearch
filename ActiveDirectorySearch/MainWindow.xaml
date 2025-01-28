@@ -23,9 +23,8 @@
         <DataGrid x:Name="ResultsGrid" Grid.Row="1" AutoGenerateColumns="False" Margin="5" HeadersVisibility="Column">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Path" Binding="{Binding Path}"/>
-                <!--<DataGridTextColumn Header="Fayl Sayı" Binding="{Binding FileCount}"/>-->
+                <DataGridTextColumn Header="File Count" Binding="{Binding FileCount}"/>
                 <DataGridTextColumn Header="Size (MB)" Binding="{Binding TotalSizeMB}"/>
-                <DataGridTextColumn Header="File Name" Binding="{Binding FileName}"/>
             </DataGrid.Columns>
         </DataGrid>
 
