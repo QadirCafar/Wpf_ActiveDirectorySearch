@@ -1,11 +1,14 @@
-﻿<Window x:Class="ActiveDirectorySearch.MainWindow"
+﻿<Window x:Class="ActiveDirectorySearch.View.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ActiveDirectorySearch"
+        xmlns:local="clr-namespace:ActiveDirectorySearch.ViewModel"
         mc:Ignorable="d"
         Title="Disc searcher" Height="450" Width="800">
+    <Window.DataContext>
+        <local:MainViewModel/>
+    </Window.DataContext>
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -17,10 +20,12 @@
         </Grid.ColumnDefinitions>
 
         <!-- ComboBox for Drives -->
-        <ComboBox x:Name="DriveSelector" Margin="5" Height="30"/>
+        <ComboBox ItemsSource="{Binding Drives}"
+                  SelectedItem="{Binding SelectedDrive}"
+                  Margin="5" Height="30"/>
 
         <!-- DataGrid for Results -->
-        <DataGrid x:Name="ResultsGrid" Grid.Row="1" AutoGenerateColumns="False" Margin="5" HeadersVisibility="Column">
+        <DataGrid ItemsSource="{Binding SearchResults}" Grid.Row="1" AutoGenerateColumns="False" Margin="5" HeadersVisibility="Column">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Path" Binding="{Binding Path}"/>
                 <DataGridTextColumn Header="File Count" Binding="{Binding FileCount}"/>
@@ -30,9 +35,9 @@
 
         <!-- Buttons -->
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
-            <Button x:Name="StartButton" Content="Search" Margin="5" Width="120" Click="StartButton_Click"/>
-            <Button x:Name="PauseButton" Content="Pause" Margin="5" Width="120" Click="PauseButton_Click"/>
-            <Button x:Name="ResumeButton" Content="Resume" Margin="5" Width="120" Click="ResumeButton_Click"/>
+            <Button Content="Search" Margin="5" Width="120" Command="{Binding StartSearchCommand}"/>
+            <Button Content="Pause" Margin="5" Width="120" Command="{Binding PauseCommand}"/>
+            <Button Content="Resume" Margin="5" Width="120" Command="{Binding ResumeCommand}"/>
         </StackPanel>
     </Grid>
 </Window>
